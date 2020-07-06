@@ -35,6 +35,10 @@ menu "LVGL TFT Display controller"
 	        bool "ER-TFT035-6"
             select LVGL_TFT_DISPLAY_CONTROLLER_ILI9488
             select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+        config LVGL_PREDEFINED_DISPLAY_ERTFT1011
+            bool "ER-TFT101-1"
+            select LVGL_TFT_DISPLAY_CONTROLLER_RA8876
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
 	    config LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
             bool "Adafruit 3.5 Featherwing"
             select LVGL_TFT_DISPLAY_CONTROLLER_HX8357
@@ -284,6 +288,7 @@ menu "LVGL TFT Display controller"
         default 64 if ( LVGL_PREDEFINED_DISPLAY_WEMOS_LOLIN || LVGL_PREDEFINED_DISPLAY_M5STICK ) && LVGL_DISPLAY_ORIENTATION_PORTRAIT
         default 128 if ( LVGL_PREDEFINED_DISPLAY_WEMOS_LOLIN || LVGL_PREDEFINED_DISPLAY_M5STICK ) && LVGL_DISPLAY_ORIENTATION_LANDSCAPE
 	    default 800 if LVGL_TFT_DISPLAY_CONTROLLER_FT81X
+        default 1024 if LVGL_TFT_DISPLAY_CONTROLLER_RA8876
         default 128 if LVGL_PREDEFINED_DISPLAY_ATAG && LVGL_DISPLAY_ORIENTATION_PORTRAIT
         default 296 if LVGL_PREDEFINED_DISPLAY_ATAG && LVGL_DISPLAY_ORIENTATION_LANDSCAPE
         default 80 if LVGL_PREDEFINED_DISPLAY_M5STICKC && (LVGL_DISPLAY_ORIENTATION_PORTRAIT || LVGL_DISPLAY_ORIENTATION_PORTRAIT_INVERTED)
@@ -300,7 +305,8 @@ menu "LVGL TFT Display controller"
 	    default 320 if LVGL_PREDEFINED_DISPLAY_ERTFT0356 || LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
         default 128 if ( LVGL_PREDEFINED_DISPLAY_WEMOS_LOLIN || LVGL_PREDEFINED_DISPLAY_M5STICK ) && LVGL_DISPLAY_ORIENTATION_PORTRAIT
         default 64 if ( LVGL_PREDEFINED_DISPLAY_WEMOS_LOLIN || LVGL_PREDEFINED_DISPLAY_M5STICK ) && LVGL_DISPLAY_ORIENTATION_LANDSCAPE
-	    default 480 if LVGL_TFT_DISPLAY_CONTROLLER_FT81X
+	    default 800 if LVGL_TFT_DISPLAY_CONTROLLER_RA8876
+        default 480 if LVGL_TFT_DISPLAY_CONTROLLER_FT81X
         default 296 if LVGL_PREDEFINED_DISPLAY_ATAG && LVGL_DISPLAY_ORIENTATION_PORTRAIT
         default 128 if LVGL_PREDEFINED_DISPLAY_ATAG && LVGL_DISPLAY_ORIENTATION_LANDSCAPE
         default 160 if LVGL_PREDEFINED_DISPLAY_M5STICKC && (LVGL_DISPLAY_ORIENTATION_PORTRAIT || LVGL_DISPLAY_ORIENTATION_PORTRAIT_INVERTED)
@@ -406,6 +412,7 @@ menu "LVGL TFT Display controller"
             default 15 if LVGL_PREDEFINED_DISPLAY_M5STICKC
             default 18 if LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
             default 23 if LVGL_PREDEFINED_PINS_TKOALA
+            default 33 if LVGL_PREDEFINED_DISPLAY_ERTFT1011
             default 13
 
             help
@@ -414,6 +421,7 @@ menu "LVGL TFT Display controller"
         config LVGL_DISPLAY_USE_SPI_MISO
             bool "Use MISO signal to control the display" if LVGL_TFT_DISPLAY_PROTOCOL_SPI
             default y if LVGL_PREDEFINED_PINS_TKOALA
+            default y if LVGL_PREDEFINED_DISPLAY_ERTFT1011
             help
                 Enable the MISO signal to control the display. You can disable
                 it when the display does not need MISO signal to be controlled.
@@ -423,6 +431,7 @@ menu "LVGL TFT Display controller"
             depends on LVGL_DISPLAY_USE_SPI_MISO
             range 0 39
             default 18 if LVGL_PREDEFINED_PINS_TKOALA
+            default 15 if LVGL_PREDEFINED_DISPLAY_ERTFT1011
             default 0
 
             help
@@ -437,6 +446,7 @@ menu "LVGL TFT Display controller"
             default 19 if LVGL_PREDEFINED_DISPLAY_WROVER4
             default 5 if LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
             default 18 if LVGL_PREDEFINED_PINS_TKOALA
+            default 14 if LVGL_PREDEFINED_DISPLAY_ERTFT1011
             default 14
 
             help
@@ -459,6 +469,7 @@ menu "LVGL TFT Display controller"
             default 22 if LVGL_PREDEFINED_DISPLAY_WROVER4
             default 15 if LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
             default 5 if LVGL_PREDEFINED_PINS_TKOALA
+            default 5 if LVGL_PREDEFINED_DISPLAY_ERTFT1011
             default 26 if LVGL_PREDEFINED_DISPLAY_ATAG
             default 15
 
@@ -500,6 +511,7 @@ menu "LVGL TFT Display controller"
             default 4 if LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
             default 15 if LVGL_PREDEFINED_PINS_TKOALA
             default 16 if LVGL_PREDEFINED_DISPLAY_ATAG
+            default 32 if LVGL_PREDEFINED_DISPLAY_ERTFT1011
             default 4
 
             help
@@ -521,6 +533,7 @@ menu "LVGL TFT Display controller"
             default y if LVGL_PREDEFINED_DISPLAY_M5STACK
             default y if LVGL_PREDEFINED_DISPLAY_WROVER4
             default y if LVGL_PREDEFINED_DISPLAY_ERTFT0356
+            default y if LVGL_PREDEFINED_DISPLAY_ERTFT1011
             help
                 Enable controlling the display backlight using an GPIO
 
@@ -545,6 +558,7 @@ menu "LVGL TFT Display controller"
             default 2 if LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
             default 27 if LVGL_PREDEFINED_DISPLAY_ERTFT0356
             default 0  if LVGL_PREDEFINED_PINS_TKOALA
+            default 4  if LVGL_PREDEFINED_DISPLAY_ERTFT1011
             default 27
 
             help
